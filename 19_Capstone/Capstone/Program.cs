@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Capstone.Views;
+using System;
 
 namespace Capstone
 {
