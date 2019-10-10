@@ -9,10 +9,10 @@ namespace CapstoneTests
     [TestClass]
     public class InventoryTests
     {
-        Item reeses = new Item("Reeses", "candy", 3.20M, "A1", 1);
-        Item lays = new Item("Lays", "chips", 4.20M, "A2", 1);
-        Item cherryCoke = new Item("Cherry Coke", "drink", 7.00m, "C6", 1);
-        Item bigChew = new Item("Big League Chew", "gum", 3.40m, "D2", 1);
+        Item reeses = new Item("Reeses", "candy", 3.20M, "A1", 5);
+        Item lays = new Item("Lays", "chips", 4.20M, "A2", 5);
+        Item cherryCoke = new Item("Cherry Coke", "drink", 7.00m, "C6", 5);
+        Item bigChew = new Item("Big League Chew", "gum", 3.40m, "D2", 5);
 
         [TestMethod]
         public void AddingItems()
@@ -32,18 +32,9 @@ namespace CapstoneTests
             inventory.AddItem(bigChew);
 
             CollectionAssert.AreEqual(resultExpected, inventory.Contents, "The inventory contents should be a dictionary with slots and items matching the input items.");
-
-            // add 4 more of each for a total of 5
-            for (int i=0; i<4; i++)
-            {
-                inventory.AddItem(reeses);
-                inventory.AddItem(lays);
-                inventory.AddItem(cherryCoke);
-                inventory.AddItem(bigChew);
-            }
             foreach(KeyValuePair<string, Item> kvp in inventory.Contents)
             {
-                Assert.AreEqual(5, inventory.Contents[kvp.Key], $"There should be 5 {kvp.Value.Name} items in slot {kvp.Key}.");
+                Assert.AreEqual(5, inventory.Contents[kvp.Key].Count, $"There should be 5 {kvp.Value.Name} items in slot {kvp.Key}.");
             }
             
         }
@@ -52,13 +43,11 @@ namespace CapstoneTests
         public void RemoveItems()
         {
             Inventory inventory = new Inventory();
-            for (int i = 0; i < 5; i++)
-            {
-                inventory.AddItem(reeses);
-                inventory.AddItem(lays);
-                inventory.AddItem(cherryCoke);
-                inventory.AddItem(bigChew);
-            }
+            inventory.AddItem(reeses);
+            inventory.AddItem(lays);
+            inventory.AddItem(cherryCoke);
+            inventory.AddItem(bigChew);
+
             foreach (KeyValuePair<string, Item> kvp in inventory.Contents)
             {
                 Assert.AreEqual(5, inventory.Contents[kvp.Key].Count, $"There should be 5 {kvp.Value.Name} items in slot {kvp.Key}.");

@@ -10,6 +10,14 @@ namespace Capstone.Models
     /// </summary>
     public class Item
     {
+        /// <summary>
+        /// Constructor for the item class.
+        /// </summary>
+        /// <param name="name">Name of the item.</param>
+        /// <param name="snackType">Chips, drink, candy, gum.</param>
+        /// <param name="price">Price of item (decimal).</param>
+        /// <param name="slot">Slot holding item (string format of capital letter and number).</param>
+        /// <param name="count">Count of item in slot.</param>
         public Item(string name, string snackType, decimal price, string slot, int count)
         {
             Name = name;
