@@ -14,11 +14,11 @@ namespace Capstone.Views
         /// </summary>
         public MainMenu() : base()
         {
-            this.Title = "*** Main Menu ***";
-            this.menuOptions.Add("1", "Option One");
-            this.menuOptions.Add("2", "Add two numbers");
-            this.menuOptions.Add("3", "Display a sub-menu");
-            this.menuOptions.Add("Q", "Quit");
+            this.Title = "*** Vendo-Matic 800 ***";
+            this.menuOptions.Add("1", "Display Vending Machine Items");
+            this.menuOptions.Add("2", "Purchase");
+            this.menuOptions.Add("3", "Exit");
+            this.menuOptions.Add("4", "Sales Report");
         }
 
         /// <summary>

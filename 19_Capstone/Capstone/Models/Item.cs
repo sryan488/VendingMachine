@@ -4,6 +4,10 @@ using System.Text;
 
 namespace Capstone.Models
 {
+    /// <summary>
+    /// Constructor
+    /// Set name, snackType, price, slot, count
+    /// </summary>
     public class Item
     {
         public Item(string name, string snackType, decimal price, string slot, int count)
@@ -15,6 +19,10 @@ namespace Capstone.Models
             Count = count;
         }
 
+        /// <summary>
+        /// Properties
+        /// Define fields Name, SnackType, Price, Slot, EatResponse
+        /// </summary>
         public string Name { get; }
         public string SnackType { get; }
         public decimal Price { get; }
