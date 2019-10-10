@@ -12,7 +12,13 @@ namespace Capstone.Models
     public class VendingMachine
     {
         public Inventory Inventory { get; private set; } = new Inventory();
+        public decimal FedMoney { get; private set; }
 
+        /// <summary>
+        /// Constructor of new Vending Machine object
+        /// Needs an inventory file to build
+        /// </summary>
+        /// <param name="inventoryFile"></param>
         public VendingMachine(string inventoryFile)
         {
             using (StreamReader sr = new StreamReader(inventoryFile))
@@ -29,7 +35,7 @@ namespace Capstone.Models
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception("InventoryFileIssue");
+                        throw new Exception("Inventory File Issue");
                     }
                 }
             }
