@@ -29,7 +29,7 @@ namespace Capstone.Menus
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("You selected option 1");
+                    Console.WriteLine("Please insert money ($1, $2, $5, $10)");
                     Pause("Press any key");
                     return true;
                 case "2":

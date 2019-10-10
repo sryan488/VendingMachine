@@ -7,7 +7,7 @@ namespace Capstone
     {
         static void Main(string[] args)
         {
-            MainMenu myMenu = new MainMenu(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachine.csv");
+            MainMenu myMenu = new MainMenu(@"C:\Users\SRyan\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachine.csv");
             myMenu.Run();
         }
     }

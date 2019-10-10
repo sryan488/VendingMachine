@@ -46,12 +46,12 @@ namespace Capstone.Models
         public List<string> ItemList()
         {
             List<string> list = new List<string>();
-            list.Add("Slot  Item Name            Price  Avail");
+            Console.WriteLine("Slot  Item Name            Price  Avail");
 
             foreach (Item item in Contents.Values)
             {
                 //list.Add(item);
-                string displayString = $"{item.Slot}:   {item.Name.PadRight(20)} {item.Price.ToString("C")}  ({(item.Count > 0 ? item.Count.ToString() : "Sold Out")})";
+                string displayString = $"{item.Slot}:   {item.Name.PadRight(20)} {item.Price.ToString("C")}   ({(item.Count > 0 ? item.Count.ToString() : "Sold Out")})";
                 list.Add(displayString);
             }
             list.Sort();
