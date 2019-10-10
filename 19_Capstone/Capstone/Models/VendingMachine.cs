@@ -35,7 +35,7 @@ namespace Capstone.Models
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception("Inventory File Issue");
+                        throw new Exception($"Inventory File Issue: {ex.Message}");
                     }
                 }
             }
