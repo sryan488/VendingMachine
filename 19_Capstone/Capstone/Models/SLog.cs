@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Capstone.Models
 {
-    public class SLog
+    public class TransLog
     {
         public string ReportPath { get; }
         public string LogPath { get; }

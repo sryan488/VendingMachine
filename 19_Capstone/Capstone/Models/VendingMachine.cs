@@ -11,6 +11,7 @@ namespace Capstone.Models
     public class VendingMachine
     {
         public Inventory Inventory { get; private set; } = new Inventory();
+        public TransLog TransLog { get; private set; } = new TransLog();
         public decimal FedMoney { get; private set; }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace Capstone.Models
         private void AddMoney(int moneyFed)
         {
             FedMoney += moneyFed;
-            // TODO Add entry to log
+            TransLog.LogFeedMoney(FedMoney, moneyFed);
         }
 
         private void SubtractMoney(int moneyUsed)
@@ -88,7 +89,7 @@ namespace Capstone.Models
             {
                 coinsGiven = "No coins are dispensed";
             }
-            // TODO Add entry to log
+            TransLog.LogGiveChange(FedMoney);
             return coinsGiven;
         }
 
