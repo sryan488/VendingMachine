@@ -46,10 +46,6 @@ namespace Capstone.Models
         public List<string> ItemList()
         {
             List<string> list = new List<string>();
-<<<<<<< HEAD
-            Console.WriteLine("Slot  Item Name            Price  Avail");
-=======
->>>>>>> ab087656f055fd3872cdc3b98526c18fab4ab4fe
 
             foreach (Item item in Contents.Values)
             {
