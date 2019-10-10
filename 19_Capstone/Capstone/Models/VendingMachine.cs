@@ -11,6 +11,8 @@ namespace Capstone.Models
     /// </summary>
     public class VendingMachine
     {
+        public Inventory Inventory { get; private set; } = new Inventory();
+
         public VendingMachine(string inventoryFile)
         {
             using (StreamReader sr = new StreamReader(inventoryFile))
