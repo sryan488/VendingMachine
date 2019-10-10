@@ -14,7 +14,7 @@ namespace Capstone.Models
         }
         
         /// <summary>
-        /// Adds an item to the Contents. If the item already exists in the slot, increments the item count by 1.
+        /// Adds an item to the Contents.
         /// </summary>
         /// <param name="item"></param>
         public void AddItem(Item item)
