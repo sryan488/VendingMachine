@@ -91,5 +91,6 @@ namespace Capstone.Models
             // TODO Add entry to log
             return coinsGiven;
         }
+
     }
 }
