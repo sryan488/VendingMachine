@@ -10,8 +10,17 @@ namespace Capstone.Models
     /// </summary>
     public class VendingMachine
     {
+        /// <summary>
+        /// An inventory containing all the items in the vending machine.
+        /// </summary>
         public Inventory Inventory { get; private set; } = new Inventory();
+        /// <summary>
+        /// A log of all vending machine transactions. Can update log text file and generate a cumulative report.
+        /// </summary>
         public TransLog TransLog { get; private set; } = new TransLog();
+        /// <summary>
+        /// Amount of money currently fed into the vending machine.
+        /// </summary>
         public decimal FedMoney { get; private set; }
 
         /// <summary>
@@ -27,11 +36,18 @@ namespace Capstone.Models
                 {
                     try
                     {
+                        // Read in the item properties from the input file
                         string inventoryLine = sr.ReadLine();
                         string[] itemFields;
                         itemFields = inventoryLine.Split("|");
+                        
+                        // Create a new item with those properties
                         Item inputItem = new Item(itemFields[1], itemFields[3], decimal.Parse(itemFields[2]), itemFields[0], 5);
+
+                        // Add the item to the inventory
                         Inventory.AddItem(inputItem);
+
+                        // TODO: Update SLog.ItemsSold dictionary with item name and 0 sold
                     }
                     catch (Exception ex)
                     {
