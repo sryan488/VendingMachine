@@ -6,8 +6,7 @@ using System.IO;
 namespace Capstone.Models
 {
     /// <summary>
-    /// Constructor
-    /// Get Inventory from inventory file 'vendingmachine.csv'
+    /// Properties
     /// </summary>
     public class VendingMachine
     {
@@ -40,6 +39,57 @@ namespace Capstone.Models
                 }
             }
             
+        }
+
+        private void AddMoney(int moneyFed)
+        {
+            FedMoney += moneyFed;
+            // TODO Add entry to log
+        }
+
+        private void SubtractMoney(int moneyUsed)
+        {
+            FedMoney -= moneyUsed;
+        }
+
+        private string DispenseChange()
+        {
+            string coinsGiven = "";
+            Dictionary<string, int> changeDict = new Dictionary<string, int>()
+            {
+                {"Quarters", 0 },
+                {"Dimes", 0 },
+                {"Nickles", 0 },
+            };
+            while(FedMoney >= .25M)
+            {
+                changeDict["Quarters"]++;
+                FedMoney -= .25M;
+            }
+            while(FedMoney >= .10M)
+            {
+                changeDict["Dimes"]++;
+                FedMoney -= .10M;
+            }
+            while(FedMoney >= .05M)
+            {
+                changeDict["Nickles"]++;
+                FedMoney -= .05M;
+            }
+            foreach(KeyValuePair<string, int> coin in changeDict)
+            {
+                if (changeDict[coin.Key] > 0)
+                {
+                    coinsGiven += $"{coin.Key} dispensed: {coin.Value}\n";
+                }
+            }
+
+            if (coinsGiven == "")
+            {
+                coinsGiven = "No coins are dispensed";
+            }
+            // TODO Add entry to log
+            return coinsGiven;
         }
     }
 }

@@ -41,13 +41,13 @@ namespace Capstone.Models
             {
                 switch(SnackType)
                 {
-                    case "chips":
+                    case "Chips":
                         return "Crunch Crunch, Yum!";
-                    case "candy":
+                    case "Candy":
                         return "Munch Munch, Yum!";
-                    case "drink":
+                    case "Drink":
                         return "Glug Glug, Yum!";
-                    case "gum":
+                    case "Gum":
                         return "Chew Chew, Yum!";
                     default:
                         throw new ArgumentException("Cannot get eat response from an invalid snack type.");
