@@ -57,7 +57,7 @@ namespace Capstone.Models
             string logItemBought = $"{Time} {itemBought.Name} {itemBought.Slot} {moneyIn + itemBought.Price:C} - {itemBought.Price:C} = {moneyIn:C}";
             Writer(logItemBought, LogPath);
             ItemsSold[itemBought.Name]++; // Update number of items sold in dictionary
-            totalSales += itemBought.Price; // Update total sales amount
+            TotalSales += itemBought.Price; // Update total sales amount
         }
 
         public void GenerateReport()

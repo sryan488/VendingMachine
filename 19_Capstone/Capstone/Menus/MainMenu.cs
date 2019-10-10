@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Capstone.Models;
 
-namespace Capstone.Views
+namespace Capstone.Menus
 {
     /// <summary>
     /// The top-level menu in our Market Application
     /// </summary>
     public class MainMenu : CLIMenu
     {
+        public VendingMachine vMachine { get; set; }
+        public PurchaseMenu pMenu { get; set; } = new PurchaseMenu();
+
         /// <summary>
         /// Constructor adds items to the top-level menu
         /// </summary>
-        public MainMenu() : base()
+        public MainMenu(string inventoryFilePath) : base()
         {
             this.Title = "*** Vendo-Matic 800 ***";
             this.menuOptions.Add("1", "Display Vending Machine Items");
             this.menuOptions.Add("2", "Purchase");
             this.menuOptions.Add("3", "Exit");
             this.menuOptions.Add("4", "Sales Report");
+            vMachine = new VendingMachine(inventoryFilePath);
         }
 
         /// <summary>
@@ -32,17 +37,20 @@ namespace Capstone.Views
             switch (choice)
             {
                 case "1":
-                    // This is just a sample, does nothing
+                    foreach (string itemInList in vMachine.Inventory.ItemList())
+                    {
+                        Console.WriteLine(itemInList);
+                    }
+                    Pause("");
+
                     return true;
                 case "2":
                     // Get some input form the user, and then do something
-                    int someNumber = GetInteger("Please enter a whole number:");
-                    int anotherNumber = GetInteger("Please enter another whole number:");
-                    Console.WriteLine($"{someNumber} + {anotherNumber} = {someNumber + anotherNumber}.");
-                    Pause("");
+                    pMenu.Run();
+                    // Pause("");
                     return true;
                 case "3":
-                    SubMenu sm = new SubMenu();
+                    PurchaseMenu sm = new PurchaseMenu();
                     sm.Run();
                     break;
             }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Capstone.Models;
 
-namespace Capstone.Views
+namespace Capstone.Menus
 {
     /// <summary>
     /// *CLIMenu* is an abstract class from which all other menu classes are derived.  To implement a menu, 

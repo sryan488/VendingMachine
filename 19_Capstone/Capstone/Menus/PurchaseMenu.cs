@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Capstone.Models;
 
-namespace Capstone.Views
+namespace Capstone.Menus
 {
-    public class SubMenu : CLIMenu
+    public class PurchaseMenu : CLIMenu
     {
         /// <summary>
         /// Constructor adds items to the top-level menu
         /// </summary>
-        public SubMenu() : base()
+        public PurchaseMenu() : base()
         {
-            this.Title = "*** Sub Menu ***";
+            this.Title = "*** Purchase Menu ***";
             this.menuOptions.Add("1", "Feed Money");
             this.menuOptions.Add("2", "Select Product");
             this.menuOptions.Add("3", "Finish Transaction");
@@ -32,7 +33,7 @@ namespace Capstone.Views
                     Pause("Press any key");
                     return true;
                 case "2":
-                    Console.WriteLine("You selected option 2. When it is done, the sub-manu will exit, because it returns false.");
+                    Console.WriteLine("You selected option 2. When it is done, the purchase-menu will exit, because it returns false.");
                     Pause("Press any key");
                     return false;
             }
