@@ -87,11 +87,11 @@ namespace CapstoneTests
 
         }
 
-        [TestMethod]
-        public void PurchaseTest()
-        {
-
-        }
+        //[TestMethod]
+        //public void PurchaseTest()
+        //{
+        //    // Cannot test, only executes methods
+        //}
 
         [TestMethod]
         public void DispenseItemTest()
