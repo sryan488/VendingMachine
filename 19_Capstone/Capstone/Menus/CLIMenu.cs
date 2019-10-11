@@ -99,7 +99,7 @@ namespace Capstone.Menus
                 }
                 else
                 {
-                    Console.WriteLine("!!! Invalid input. Please enter a valid whole number.");
+                    
                 }
             }
             return resultValue;
@@ -123,7 +123,7 @@ namespace Capstone.Menus
                 }
                 else
                 {
-                    Console.WriteLine("!!! Invalid input. Please enter a valid decimal number.");
+                    
                 }
             }
             return resultValue;
@@ -157,7 +157,7 @@ namespace Capstone.Menus
                 }
                 else
                 {
-                    Console.WriteLine("!!! Invalid input. Please enter [True, False, Y or N].");
+                    
                 }
             }
             return resultValue;
@@ -180,7 +180,7 @@ namespace Capstone.Menus
                 }
                 else
                 {
-                    Console.WriteLine("!!! Invalid input. Please enter a valid decimal number.");
+                   
                 }
             }
         }

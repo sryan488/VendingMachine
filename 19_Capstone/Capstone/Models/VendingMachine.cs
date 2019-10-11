@@ -47,7 +47,7 @@ namespace Capstone.Models
                         // Add the item to the inventory
                         Inventory.AddItem(inputItem);
 
-                        // TODO: Update SLog.ItemsSold dictionary with item name and 0 sold
+                        TransLog.ItemsSold.TryAdd(inputItem.Name, 0);
                     }
                     catch (Exception ex)
                     {
@@ -125,6 +125,7 @@ namespace Capstone.Models
             else
             {
                 DispenseItem(Inventory.Contents[slot]);
+                TransLog.TotalSales += Inventory.Contents[slot].Price;
             }
 
         }

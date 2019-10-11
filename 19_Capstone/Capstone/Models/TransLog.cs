@@ -7,7 +7,12 @@ namespace Capstone.Models
 {
     public class TransLog
     {
-        public string DirectoryForLogFilesPath { get; set; } // TODO: find place to set directoryforlogfilespath
+        public TransLog()
+        {
+            DirectoryForLogFilesPath = Directory.GetCurrentDirectory() + @"\..\..\..\..";
+        }
+
+        public string DirectoryForLogFilesPath { get; set; }
         public string LogPath
         {
             get
@@ -19,7 +24,7 @@ namespace Capstone.Models
         {
             get
             {
-                return DirectoryForLogFilesPath + $"/{Time.ToString(@"yyyy/MM/dd_hh:mm:ss_tt")} - Vending Machine Cumulative Report.txt";
+                return DirectoryForLogFilesPath + $"/{Time.ToString(@"yyyy-MM-dd_hh_mm_ss_tt")} - Vending Machine Cumulative Report.txt";
             }
         }
         public DateTime Time
@@ -42,7 +47,7 @@ namespace Capstone.Models
         
         public void LogFeedMoney(decimal machineBalance, decimal moneyAdded)
         {
-            string logMoneyIn = $"{Time} FEED MONEY: {machineBalance:C} + {moneyAdded:C} = {machineBalance + moneyAdded:C}";
+            string logMoneyIn = $"{Time} FEED MONEY: {(machineBalance - moneyAdded):C} + {moneyAdded:C} = {machineBalance:C}";
             Writer(logMoneyIn, LogPath);
         }
 
@@ -54,7 +59,7 @@ namespace Capstone.Models
 
         public void LogPurchase(decimal machineBalance, Item itemBought)
         {
-            string logItemBought = $"{Time} {itemBought.Name} {itemBought.Slot} {machineBalance + itemBought.Price:C} - {itemBought.Price:C} = {machineBalance:C}";
+            string logItemBought = $"{Time} {itemBought.Name} {itemBought.Slot} {(machineBalance + itemBought.Price):C} - {itemBought.Price:C} = {machineBalance:C}";
             Writer(logItemBought, LogPath);
             ItemsSold[itemBought.Name]++; // Update number of items sold in dictionary
             TotalSales += itemBought.Price; // Update total sales amount
@@ -67,6 +72,7 @@ namespace Capstone.Models
                 string line = $"{kvp.Key}|{kvp.Value}";
                 Writer(line, ReportPath);
             }
+            Writer($"\nTotal Sales: {TotalSales:C}", ReportPath);
         }
     }
 }

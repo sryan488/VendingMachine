@@ -62,11 +62,8 @@ namespace Capstone.Menus
             {
                 case "1":
                     Console.WriteLine("Please insert money (Only accepts dollar amounts: $1, $2, $5, $10, etc.)");
-                    decimal moneyInserted = int.Parse(Console.ReadLine());
+                    decimal moneyInserted = (int)decimal.Parse(Console.ReadLine());
                     vMachine.AddMoney(moneyInserted);
-
-                    
-                    Pause("Press any key");
                     vMachine.TransLog.LogFeedMoney(vMachine.FedMoney, moneyInserted);
                     return true;
                 case "2":
@@ -77,15 +74,23 @@ namespace Capstone.Menus
                     
                     Console.WriteLine("Please enter slot selection:");
                     string slotSelection = Console.ReadLine().ToUpper();
-
-                    vMachine.Purchase(slotSelection);
-                    vMachine.TransLog.LogPurchase(vMachine.FedMoney, vMachine.Inventory.Contents[slotSelection]);
+                    if(vMachine.Inventory.Contents[slotSelection].Price > vMachine.FedMoney)
+                    {
+                        Console.WriteLine($"You don't have enough money inserted. You need at least {vMachine.Inventory.Contents[slotSelection].Price:C} to purchase that item.");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        vMachine.Purchase(slotSelection);
+                        vMachine.TransLog.LogPurchase(vMachine.FedMoney, vMachine.Inventory.Contents[slotSelection]);
+                    }
                     return true;
                 case "3":
+                    vMachine.TransLog.LogGiveChange(vMachine.FedMoney);
                     string coinsgiven = vMachine.DispenseChange();
                     Console.WriteLine(coinsgiven);
                     Console.ReadLine();
-                    vMachine.TransLog.LogGiveChange(vMachine.FedMoney);
+                    
                     return false;
             }
             return true;
