@@ -61,38 +61,40 @@ namespace Capstone.Menus
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("Please insert money (Only accepts dollar amounts: $1, $2, $5, $10, etc.)");
-                    decimal moneyInserted;
+                    Console.WriteLine("Please insert money (Only accepts whole dollar amounts e.g. $1, $2, $5, $10, etc.)");
+                    decimal moneyFed;
 
                     try
                     {
-                        moneyInserted = decimal.Parse(Console.ReadLine());
-
-                        if ((int)moneyInserted != moneyInserted) // Non-whole amount
-                        {
-                            Pause("Please insert a whole dollar amount.");
-                            return true;
-                        }
-
-                        if (moneyInserted < 0) // Negative numbers
-                        {
-                            Pause("Be more positive!");
-                            return true;
-                        }
+                        moneyFed = decimal.Parse(Console.ReadLine());
+                        vMachine.AddMoney(moneyFed);
+                        vMachine.TransLog.LogFeedMoney(vMachine.FedMoney, moneyFed);
+                        return true;
                     }
-                    catch (OverflowException) // Amount too large
+                    // Non-integer entry
+                    catch (ArgumentException e) when (e.Message == "Non-integer money fed exception.")
+                    {
+                        Pause("Please insert a whole dollar amount.");
+                        return true;
+                    }
+                    // Tried to use negative dollars
+                    catch (ArgumentException e) when (e.Message == "Negative money feed exception.")
+                    {
+                        Pause("Be more positive!");
+                        return true;
+                    }
+                    // Amount too large
+                    catch (OverflowException) 
                     {
                         Pause("Okay moneybags, try a reasonable amount.");
                         return true;
                     }
-                    catch (FormatException) // Blank amount
+                    // Blank amount
+                    catch (FormatException) 
                     {
                         return true;
                     }
 
-                    vMachine.AddMoney(moneyInserted);
-                    vMachine.TransLog.LogFeedMoney(vMachine.FedMoney, moneyInserted);
-                    return true;
                 case "2":
                     foreach (string itemInList in vMachine.Inventory.ItemList())
                     {
@@ -101,23 +103,35 @@ namespace Capstone.Menus
                     
                     Console.WriteLine("Please enter slot selection:");
                     string slot = Console.ReadLine().ToUpper();
+                    try
+                    {
+                        Item item = vMachine.Purchase(slot);
 
-                    if (!vMachine.Inventory.Contents.ContainsKey(slot))
+                        string displayOutput = $"Dispensing: {item.Name}\n"
+                            + $"Spent: {item.Price:C}\n"
+                            + $"Money remaining: {vMachine.FedMoney - item.Price:C}\n"
+                            + $"{item.EatResponse}\n";
+                        Pause(displayOutput);
+
+                    }
+                    // slot not in machine dict
+                    catch (ArgumentException e) when (e.Message == "Invalid slot.")
                     {
                         Pause("That slot does not exist");
                     }
-                    else if (vMachine.Inventory.Contents[slot].Count <= 0)
+                    // slot out of stock
+                    catch (Exception e) when (e.Message == "Out of stock exception.")
                     {
                         Pause("That item is SOLD OUT");
                     }
-                    else if (vMachine.Inventory.Contents[slot].Price > vMachine.FedMoney)                    {
+                    // not enough money to purchase
+                    catch (Exception e) when (e.Message == "You're broke!")
+                    {
                         Pause($"You don't have enough money inserted. You need at least {vMachine.Inventory.Contents[slot].Price:C} to purchase that item.");
                     }
-                    else
-                    {
-                        vMachine.Purchase(slot);
-                    }
+
                     return true;
+
                 case "3":
                     vMachine.TransLog.LogGiveChange(vMachine.FedMoney);
                     string coinsgiven = vMachine.DispenseChange();

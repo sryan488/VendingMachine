@@ -60,7 +60,18 @@ namespace Capstone.Models
 
         public void AddMoney(decimal moneyFed)
         {
-            FedMoney += moneyFed;
+            if ((decimal)(int)moneyFed != moneyFed) // Non-whole amount
+            {
+                throw new ArgumentException("Non-integer money fed exception.");
+            }
+            else if (moneyFed < 0) // Negative numbers
+            {
+                throw new ArgumentException("Negative money feed exception.");
+            }
+            else
+            {
+                FedMoney += moneyFed;
+            }
         }
 
         public void SubtractMoney(decimal moneyUsed)
@@ -108,20 +119,31 @@ namespace Capstone.Models
             return coinsGiven;
         }
 
-        public void Purchase(string slot)
+        public Item Purchase(string slot)
         {
-                DispenseItem(Inventory.Contents[slot]);
-                TransLog.LogPurchase(FedMoney, Inventory.Contents[slot]);
+            if (!Inventory.Contents.ContainsKey(slot))
+            {
+                throw new ArgumentException("Invalid slot.");
+            }
+            else if (Inventory.Contents[slot].Count <= 0)
+            {
+                throw new Exception("Out of stock exception.");
+            }
+            else if (Inventory.Contents[slot].Price > FedMoney)
+            {
+                throw new Exception("You're broke!");
+            }
+            else
+            {
+                Item item = Inventory.Contents[slot];
+                DispenseItem(item);
+                TransLog.LogPurchase(FedMoney, item);
+                return item;
+            }
         }
 
         public void DispenseItem(Item item)
         {
-            Console.WriteLine($"Dispensing: {item.Name}");
-            Console.WriteLine($"Spent: {item.Price:C}");
-            Console.WriteLine($"Money remaining: {FedMoney - item.Price:C}");
-            Console.WriteLine($"{item.EatResponse}");
-            Console.ReadLine();
-
             item.Count--;
             SubtractMoney(item.Price);
         }

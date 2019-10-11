@@ -15,7 +15,7 @@ namespace Capstone
                 path = Console.ReadLine();
                 if (path == "")
                 {
-                    //path = @"C:\Users\Sroy\Documents\git\c-module-1-capstone-team-8\19_Capstone\vendingmachine.csv";
+                    path = @"..\..\..\..\vendingmachine.csv";
                     if(!File.Exists(path))
                     {
                         Console.WriteLine("Error: Could not find default file. Please provide a direct file or contact your system administrator.\n");
