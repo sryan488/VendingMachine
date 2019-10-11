@@ -21,7 +21,7 @@ namespace Capstone.Models
         public Item(string name, string snackType, decimal price, string slot, int count)
         {
             Name = name;
-            SnackType = snackType;
+            SnackType = snackType.ToLower();
             Price = price;
             Slot = slot;
             Count = count;
@@ -41,13 +41,13 @@ namespace Capstone.Models
             {
                 switch(SnackType)
                 {
-                    case "Chip":
+                    case "chip":
                         return "Crunch Crunch, Yum!";
-                    case "Candy":
+                    case "candy":
                         return "Munch Munch, Yum!";
-                    case "Drink":
+                    case "drink":
                         return "Glug Glug, Yum!";
-                    case "Gum":
+                    case "gum":
                         return "Chew Chew, Yum!";
                     default:
                         throw new ArgumentException("Cannot get eat response from an invalid snack type.");

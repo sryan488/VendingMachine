@@ -113,7 +113,6 @@ namespace Capstone.Models
         public void Purchase(string slot)
         {
                 DispenseItem(Inventory.Contents[slot]);
-                // TransLog.TotalSales += Inventory.Contents[slot].Price;
                 TransLog.LogPurchase(FedMoney, Inventory.Contents[slot]);
         }
 
