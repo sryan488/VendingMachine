@@ -109,7 +109,7 @@ namespace Capstone.Menus
 
                         string displayOutput = $"Dispensing: {item.Name}\n"
                             + $"Spent: {item.Price:C}\n"
-                            + $"Money remaining: {vMachine.FedMoney - item.Price:C}\n"
+                            + $"Money remaining: {vMachine.FedMoney}\n"
                             + $"{item.EatResponse}\n";
                         Pause(displayOutput);
 
