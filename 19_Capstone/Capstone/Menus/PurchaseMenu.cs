@@ -7,15 +7,47 @@ namespace Capstone.Menus
 {
     public class PurchaseMenu : CLIMenu
     {
+        public VendingMachine vMachine { get; set; }
+
         /// <summary>
         /// Constructor adds items to the top-level menu
         /// </summary>
-        public PurchaseMenu() : base()
+        public PurchaseMenu(VendingMachine vendingMachine ) : base()
         {
+            vMachine = vendingMachine;
             this.Title = "*** Purchase Menu ***";
             this.menuOptions.Add("1", "Feed Money");
             this.menuOptions.Add("2", "Select Product");
             this.menuOptions.Add("3", "Finish Transaction");
+        }
+
+        override public void Run()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine(this.Title);
+                Console.WriteLine(new string('=', this.Title.Length));
+                Console.WriteLine("\r\nPlease make a selection:");
+                foreach (KeyValuePair<string, string> menuItem in menuOptions)
+                {
+                    if (menuItem.Key != "4")
+                    {
+                        Console.WriteLine($"({menuItem.Key}) {menuItem.Value}");
+                    }
+                }
+                Console.WriteLine($"\nCurrent Money Provided: {vMachine.FedMoney:C}");
+                string choice = GetString("Selection:").ToUpper();
+
+                if (menuOptions.ContainsKey(choice))
+                {
+                    if (!ExecuteSelection(choice))
+                    {
+                        break;
+                    }
+                }
+
+            }
         }
 
         /// <summary>
@@ -29,12 +61,28 @@ namespace Capstone.Menus
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("Please insert money ($1, $2, $5, or $10)");
+                    Console.WriteLine("Please insert money (Only accepts dollar amounts: $1, $2, $5, $10, etc.)");
+                    decimal moneyInserted = int.Parse(Console.ReadLine());
+                    vMachine.AddMoney(moneyInserted);
+
+                    
                     Pause("Press any key");
                     return true;
                 case "2":
-                    Console.WriteLine("You selected option 2. When it is done, the purchase-menu will exit, because it returns false.");
-                    Pause("Press any key");
+                    foreach (string itemInList in vMachine.Inventory.ItemList())
+                    {
+                        Console.WriteLine(itemInList);
+                    }
+                    
+                    Console.WriteLine("Please enter slot selection:");
+                    string slotSelection = Console.ReadLine().ToUpper();
+
+                    vMachine.Purchase(slotSelection);
+                    return true;
+                case "3":
+                    string coinsgiven = vMachine.DispenseChange();
+                    Console.WriteLine(coinsgiven);
+                    Console.ReadLine();
                     return false;
             }
             return true;

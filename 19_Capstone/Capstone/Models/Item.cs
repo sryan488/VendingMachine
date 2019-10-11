@@ -41,7 +41,7 @@ namespace Capstone.Models
             {
                 switch(SnackType)
                 {
-                    case "Chips":
+                    case "Chip":
                         return "Crunch Crunch, Yum!";
                     case "Candy":
                         return "Munch Munch, Yum!";

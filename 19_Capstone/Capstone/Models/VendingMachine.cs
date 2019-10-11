@@ -58,18 +58,18 @@ namespace Capstone.Models
             
         }
 
-        private void AddMoney(int moneyFed)
+        public void AddMoney(decimal moneyFed)
         {
             FedMoney += moneyFed;
-            TransLog.LogFeedMoney(FedMoney, moneyFed);
+            //TransLog.LogFeedMoney(FedMoney, moneyFed);
         }
 
-        private void SubtractMoney(int moneyUsed)
+        public void SubtractMoney(decimal moneyUsed)
         {
             FedMoney -= moneyUsed;
         }
 
-        private string DispenseChange()
+        public string DispenseChange()
         {
             string coinsGiven = "";
             Dictionary<string, int> changeDict = new Dictionary<string, int>()
@@ -105,9 +105,40 @@ namespace Capstone.Models
             {
                 coinsGiven = "No coins are dispensed";
             }
-            TransLog.LogGiveChange(FedMoney);
+
+            //TransLog.LogGiveChange(FedMoney);
             return coinsGiven;
         }
 
+        public void Purchase(string slot)
+        {
+            if (!Inventory.Contents.ContainsKey(slot))
+            {
+                Console.WriteLine("That product code does not exist");
+                Console.ReadLine();
+            }
+            else if (Inventory.Contents[slot].Count == 0)
+            {
+                Console.WriteLine("That item is SOLD OUT");
+                Console.ReadLine();
+            }
+            else
+            {
+                DispenseItem(Inventory.Contents[slot]);
+            }
+
+        }
+
+        public void DispenseItem(Item item)
+        {
+            Console.WriteLine($"Dispensing: {item.Name}");
+            Console.WriteLine($"Spent: {item.Price}");
+            Console.WriteLine($"Money remaining: {FedMoney - item.Price}");
+            Console.WriteLine($"{item.EatResponse}");
+            Console.ReadLine();
+
+            item.Count--;
+            SubtractMoney(item.Price);
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace Capstone.Menus
         /// <summary>
         /// Run starts the menu loop
         /// </summary>
-        public void Run()
+        virtual public void Run()
         {
             while (true)
             {

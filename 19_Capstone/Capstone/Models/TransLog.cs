@@ -40,9 +40,9 @@ namespace Capstone.Models
             }
         }
         
-        public void LogFeedMoney(decimal moneyIn, int moneyAdded)
+        public void LogFeedMoney(decimal moneyIn, decimal moneyAdded)
         {
-            string logMoneyIn = $"{Time} FEED MONEY: {moneyIn:C} + {(decimal)moneyAdded:C} = {moneyIn + moneyAdded:C}";
+            string logMoneyIn = $"{Time} FEED MONEY: {moneyIn:C} + {moneyAdded:C} = {moneyIn + moneyAdded:C}";
             Writer(logMoneyIn, LogPath);
         }
 

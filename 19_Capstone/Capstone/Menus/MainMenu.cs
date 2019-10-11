@@ -11,7 +11,7 @@ namespace Capstone.Menus
     public class MainMenu : CLIMenu
     {
         public VendingMachine vMachine { get; set; }
-        public PurchaseMenu pMenu { get; set; } = new PurchaseMenu();
+        public PurchaseMenu pMenu { get; set; }
 
         /// <summary>
         /// Constructor adds items to the top-level menu
@@ -24,6 +24,7 @@ namespace Capstone.Menus
             this.menuOptions.Add("3", "Exit");
             this.menuOptions.Add("4", "Sales Report");
             vMachine = new VendingMachine(inventoryFilePath);
+            pMenu = new PurchaseMenu(vMachine);
         }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace Capstone.Menus
                     // Pause("");
                     return true;
                 case "3":
-                    PurchaseMenu sm = new PurchaseMenu();
+                    PurchaseMenu sm = new PurchaseMenu(vMachine);
                     sm.Run();
                     break;
             }
