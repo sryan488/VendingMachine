@@ -67,6 +67,7 @@ namespace Capstone.Menus
 
                     
                     Pause("Press any key");
+                    vMachine.TransLog.LogFeedMoney(vMachine.FedMoney, moneyInserted);
                     return true;
                 case "2":
                     foreach (string itemInList in vMachine.Inventory.ItemList())
@@ -78,11 +79,13 @@ namespace Capstone.Menus
                     string slotSelection = Console.ReadLine().ToUpper();
 
                     vMachine.Purchase(slotSelection);
+                    vMachine.TransLog.LogPurchase(vMachine.FedMoney, vMachine.Inventory.Contents[slotSelection]);
                     return true;
                 case "3":
                     string coinsgiven = vMachine.DispenseChange();
                     Console.WriteLine(coinsgiven);
                     Console.ReadLine();
+                    vMachine.TransLog.LogGiveChange(vMachine.FedMoney);
                     return false;
             }
             return true;

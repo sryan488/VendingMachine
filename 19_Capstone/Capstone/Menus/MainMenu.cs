@@ -54,6 +54,9 @@ namespace Capstone.Menus
                     PurchaseMenu sm = new PurchaseMenu(vMachine);
                     sm.Run();
                     break;
+                case "4":
+                    vMachine.TransLog.GenerateReport();
+                    break;
             }
             return true;
         }

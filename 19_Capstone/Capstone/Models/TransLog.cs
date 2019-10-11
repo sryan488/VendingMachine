@@ -40,21 +40,21 @@ namespace Capstone.Models
             }
         }
         
-        public void LogFeedMoney(decimal moneyIn, decimal moneyAdded)
+        public void LogFeedMoney(decimal machineBalance, decimal moneyAdded)
         {
-            string logMoneyIn = $"{Time} FEED MONEY: {moneyIn:C} + {moneyAdded:C} = {moneyIn + moneyAdded:C}";
+            string logMoneyIn = $"{Time} FEED MONEY: {machineBalance:C} + {moneyAdded:C} = {machineBalance + moneyAdded:C}";
             Writer(logMoneyIn, LogPath);
         }
 
-        public void LogGiveChange(decimal moneyIn)
+        public void LogGiveChange(decimal machineBalance)
         {
-            string logMoneyOut = $"{Time.ToString("G")} GIVE CHANGE: {moneyIn:C} - {moneyIn:C} = {0:C}";
+            string logMoneyOut = $"{Time.ToString("G")} GIVE CHANGE: {machineBalance:C} - {machineBalance:C} = {0:C}";
             Writer(logMoneyOut, LogPath);
         }
 
-        public void LogPurchase(decimal moneyIn, Item itemBought)
+        public void LogPurchase(decimal machineBalance, Item itemBought)
         {
-            string logItemBought = $"{Time} {itemBought.Name} {itemBought.Slot} {moneyIn + itemBought.Price:C} - {itemBought.Price:C} = {moneyIn:C}";
+            string logItemBought = $"{Time} {itemBought.Name} {itemBought.Slot} {machineBalance + itemBought.Price:C} - {itemBought.Price:C} = {machineBalance:C}";
             Writer(logItemBought, LogPath);
             ItemsSold[itemBought.Name]++; // Update number of items sold in dictionary
             TotalSales += itemBought.Price; // Update total sales amount
