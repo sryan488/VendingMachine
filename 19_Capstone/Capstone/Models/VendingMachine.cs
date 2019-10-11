@@ -133,8 +133,8 @@ namespace Capstone.Models
         public void DispenseItem(Item item)
         {
             Console.WriteLine($"Dispensing: {item.Name}");
-            Console.WriteLine($"Spent: {item.Price}");
-            Console.WriteLine($"Money remaining: {FedMoney - item.Price}");
+            Console.WriteLine($"Spent: {item.Price:C}");
+            Console.WriteLine($"Money remaining: {FedMoney - item.Price:C}");
             Console.WriteLine($"{item.EatResponse}");
             Console.ReadLine();
 
