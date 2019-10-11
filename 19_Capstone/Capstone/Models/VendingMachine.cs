@@ -61,7 +61,6 @@ namespace Capstone.Models
         public void AddMoney(decimal moneyFed)
         {
             FedMoney += moneyFed;
-            //TransLog.LogFeedMoney(FedMoney, moneyFed);
         }
 
         public void SubtractMoney(decimal moneyUsed)
@@ -76,7 +75,7 @@ namespace Capstone.Models
             {
                 {"Quarters", 0 },
                 {"Dimes", 0 },
-                {"Nickles", 0 },
+                {"Nickels", 0 },
             };
             while(FedMoney >= .25M)
             {
@@ -90,7 +89,7 @@ namespace Capstone.Models
             }
             while(FedMoney >= .05M)
             {
-                changeDict["Nickles"]++;
+                changeDict["Nickels"]++;
                 FedMoney -= .05M;
             }
             foreach(KeyValuePair<string, int> coin in changeDict)
@@ -106,7 +105,6 @@ namespace Capstone.Models
                 coinsGiven = "No coins are dispensed";
             }
 
-            //TransLog.LogGiveChange(FedMoney);
             return coinsGiven;
         }
 
