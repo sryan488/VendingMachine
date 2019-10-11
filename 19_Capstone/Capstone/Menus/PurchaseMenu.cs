@@ -62,7 +62,34 @@ namespace Capstone.Menus
             {
                 case "1":
                     Console.WriteLine("Please insert money (Only accepts dollar amounts: $1, $2, $5, $10, etc.)");
-                    decimal moneyInserted = (int)decimal.Parse(Console.ReadLine());
+                    decimal moneyInserted;
+
+                    try
+                    {
+                        moneyInserted = decimal.Parse(Console.ReadLine());
+
+                        if ((int)moneyInserted != moneyInserted) // Non-whole amount
+                        {
+                            Pause("Please insert a whole dollar amount.");
+                            return true;
+                        }
+
+                        if (moneyInserted < 0) // Negative numbers
+                        {
+                            Pause("Be more positive!");
+                            return true;
+                        }
+                    }
+                    catch (OverflowException) // Amount too large
+                    {
+                        Pause("Okay moneybags, try a reasonable amount.");
+                        return true;
+                    }
+                    catch (FormatException) // Blank amount
+                    {
+                        return true;
+                    }
+
                     vMachine.AddMoney(moneyInserted);
                     vMachine.TransLog.LogFeedMoney(vMachine.FedMoney, moneyInserted);
                     return true;
@@ -73,16 +100,22 @@ namespace Capstone.Menus
                     }
                     
                     Console.WriteLine("Please enter slot selection:");
-                    string slotSelection = Console.ReadLine().ToUpper();
-                    if(vMachine.Inventory.Contents[slotSelection].Price > vMachine.FedMoney)
+                    string slot = Console.ReadLine().ToUpper();
+
+                    if (!vMachine.Inventory.Contents.ContainsKey(slot))
                     {
-                        Console.WriteLine($"You don't have enough money inserted. You need at least {vMachine.Inventory.Contents[slotSelection].Price:C} to purchase that item.");
-                        Console.ReadLine();
+                        Pause("That slot does not exist");
+                    }
+                    else if (vMachine.Inventory.Contents[slot].Count <= 0)
+                    {
+                        Pause("That item is SOLD OUT");
+                    }
+                    else if (vMachine.Inventory.Contents[slot].Price > vMachine.FedMoney)                    {
+                        Pause($"You don't have enough money inserted. You need at least {vMachine.Inventory.Contents[slot].Price:C} to purchase that item.");
                     }
                     else
                     {
-                        vMachine.Purchase(slotSelection);
-                        vMachine.TransLog.LogPurchase(vMachine.FedMoney, vMachine.Inventory.Contents[slotSelection]);
+                        vMachine.Purchase(slot);
                     }
                     return true;
                 case "3":

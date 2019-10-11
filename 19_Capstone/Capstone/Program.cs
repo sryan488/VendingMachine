@@ -11,7 +11,7 @@ namespace Capstone
             string path = Console.ReadLine();
             if (path == "")
             {
-                path = @"C:\Users\SRoy\Documents\git\c-module-1-capstone-team-8\19_Capstone\vendingmachine.csv";
+                path = @"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachine.csv";
             }
             MainMenu myMenu = new MainMenu(path);
             myMenu.Run();

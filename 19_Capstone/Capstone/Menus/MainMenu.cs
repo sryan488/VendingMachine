@@ -56,6 +56,7 @@ namespace Capstone.Menus
                     break;
                 case "4":
                     vMachine.TransLog.GenerateReport();
+                    Pause("Shhhh... we created a sales report. Don't tell anyone.");
                     break;
             }
             return true;

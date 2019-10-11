@@ -24,7 +24,7 @@ namespace Capstone.Models
         {
             get
             {
-                return DirectoryForLogFilesPath + $"/{Time.ToString(@"yyyy-MM-dd_hh_mm_ss_tt")} - Vending Machine Cumulative Report.txt";
+                return DirectoryForLogFilesPath + $"/Vending_Machine_Sales_Report_{Time.ToString(@"yyyyMMdd_HHmmss")}.txt";
             }
         }
         public DateTime Time
@@ -47,19 +47,19 @@ namespace Capstone.Models
         
         public void LogFeedMoney(decimal machineBalance, decimal moneyAdded)
         {
-            string logMoneyIn = $"{Time} FEED MONEY: {(machineBalance - moneyAdded):C} + {moneyAdded:C} = {machineBalance:C}";
+            string logMoneyIn = $"{Time} {"FEED MONEY:".PadRight(25)} {(machineBalance - moneyAdded):C} + {moneyAdded:C} = {machineBalance:C}";
             Writer(logMoneyIn, LogPath);
         }
 
         public void LogGiveChange(decimal machineBalance)
         {
-            string logMoneyOut = $"{Time.ToString("G")} GIVE CHANGE: {machineBalance:C} - {machineBalance:C} = {0:C}";
+            string logMoneyOut = $"{Time.ToString("G")} {"GIVE CHANGE:".PadRight(25)} {machineBalance:C} - {machineBalance:C} = {0:C}";
             Writer(logMoneyOut, LogPath);
         }
 
         public void LogPurchase(decimal machineBalance, Item itemBought)
         {
-            string logItemBought = $"{Time} {itemBought.Name} {itemBought.Slot} {(machineBalance + itemBought.Price):C} - {itemBought.Price:C} = {machineBalance:C}";
+            string logItemBought = $"{Time} {itemBought.Name.PadRight(22)} {itemBought.Slot} {(machineBalance + itemBought.Price):C} - {itemBought.Price:C} = {machineBalance:C}";
             Writer(logItemBought, LogPath);
             ItemsSold[itemBought.Name]++; // Update number of items sold in dictionary
             TotalSales += itemBought.Price; // Update total sales amount

@@ -112,22 +112,9 @@ namespace Capstone.Models
 
         public void Purchase(string slot)
         {
-            if (!Inventory.Contents.ContainsKey(slot))
-            {
-                Console.WriteLine("That product code does not exist");
-                Console.ReadLine();
-            }
-            else if (Inventory.Contents[slot].Count == 0)
-            {
-                Console.WriteLine("That item is SOLD OUT");
-                Console.ReadLine();
-            }
-            else
-            {
                 DispenseItem(Inventory.Contents[slot]);
-                TransLog.TotalSales += Inventory.Contents[slot].Price;
-            }
-
+                // TransLog.TotalSales += Inventory.Contents[slot].Price;
+                TransLog.LogPurchase(FedMoney, Inventory.Contents[slot]);
         }
 
         public void DispenseItem(Item item)
