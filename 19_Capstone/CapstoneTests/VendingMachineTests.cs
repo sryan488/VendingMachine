@@ -10,11 +10,11 @@ namespace CapstoneTests
         public void AddMoneyTest()
         {
             // Arrange
-            VendingMachine vm1 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
-            VendingMachine vm2 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
-            VendingMachine vm3 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
-            VendingMachine vm4 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
-            VendingMachine vm5 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
+            VendingMachine vm1 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
+            VendingMachine vm2 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
+            VendingMachine vm3 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
+            VendingMachine vm4 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
+            VendingMachine vm5 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
 
             // Act
             vm1.AddMoney(1M);
@@ -35,11 +35,11 @@ namespace CapstoneTests
         public void SubtractMoneyTest()
         {
             // Arrange
-            VendingMachine vm1 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
-            VendingMachine vm2 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
-            VendingMachine vm3 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
-            VendingMachine vm4 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
-            VendingMachine vm5 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
+            VendingMachine vm1 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
+            VendingMachine vm2 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
+            VendingMachine vm3 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
+            VendingMachine vm4 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
+            VendingMachine vm5 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
 
             // Act
             vm1.SubtractMoney(1M);
@@ -60,15 +60,15 @@ namespace CapstoneTests
         public void DispenseChangeTest()
         {
             // Arrange
-            VendingMachine vm1 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
+            VendingMachine vm1 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
             vm1.AddMoney(1M);
-            VendingMachine vm2 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
+            VendingMachine vm2 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
             vm2.AddMoney(1.15M);
-            VendingMachine vm3 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
+            VendingMachine vm3 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
             vm3.AddMoney(.80M);
-            VendingMachine vm4 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
+            VendingMachine vm4 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
             vm4.AddMoney(.10M);
-            VendingMachine vm5 = new VendingMachine(@"C:\Users\KPartezana\Git\c-module-1-capstone-team-8\19_Capstone\vendingmachinetestfile.csv");
+            VendingMachine vm5 = new VendingMachine(@"..\..\..\..\vendingmachine.csv");
             vm5.AddMoney(0M);
 
             // Act
