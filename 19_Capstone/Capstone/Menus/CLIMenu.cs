@@ -60,10 +60,6 @@ namespace Capstone.Menus
 
                 if (menuOptions.ContainsKey(choice))
                 {
-                    if (choice == "3")
-                    {
-                        break;
-                    }
                     if (!ExecuteSelection(choice))
                     {
                         break;

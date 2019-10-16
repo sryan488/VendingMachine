@@ -51,13 +51,11 @@ namespace Capstone.Menus
                     // Pause("");
                     return true;
                 case "3":
-                    PurchaseMenu sm = new PurchaseMenu(vMachine);
-                    sm.Run();
-                    break;
+                    return false;
                 case "4":
                     vMachine.TransLog.GenerateReport();
                     Pause("Shhhh... we created a sales report. Don't tell anyone.");
-                    break;
+                    return true;
             }
             return true;
         }
