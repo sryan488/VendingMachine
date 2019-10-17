@@ -58,6 +58,10 @@ namespace Capstone.Models
             
         }
 
+        /// <summary>
+        /// Add money to the "FedMoney" machine balance.
+        /// </summary>
+        /// <param name="moneyFed"></param>
         public void AddMoney(decimal moneyFed)
         {
             if ((decimal)(int)moneyFed != moneyFed) // Non-whole amount
@@ -73,12 +77,18 @@ namespace Capstone.Models
                 FedMoney += moneyFed;
             }
         }
-
+        /// <summary>
+        /// Subtracts money from the "FedMoney" machine balance.
+        /// </summary>
+        /// <param name="moneyUsed"></param>
         public void SubtractMoney(decimal moneyUsed)
         {
             FedMoney -= moneyUsed;
         }
-
+        /// <summary>
+        /// Returns the user's change using the least number of coins.
+        /// </summary>
+        /// <returns></returns>
         public string DispenseChange()
         {
             string coinsGiven = "";
@@ -118,7 +128,11 @@ namespace Capstone.Models
 
             return coinsGiven;
         }
-
+        /// <summary>
+        /// If the given slot is valid, makes transaction and dispenses item.
+        /// </summary>
+        /// <param name="slot"></param>
+        /// <returns></returns>
         public Item Purchase(string slot)
         {
             if (!Inventory.Contents.ContainsKey(slot))
@@ -141,7 +155,10 @@ namespace Capstone.Models
                 return item;
             }
         }
-
+        /// <summary>
+        /// Dispenses an item from the inventory and removes the cost from the machine balance.
+        /// </summary>
+        /// <param name="item"></param>
         public void DispenseItem(Item item)
         {
             item.Count--;

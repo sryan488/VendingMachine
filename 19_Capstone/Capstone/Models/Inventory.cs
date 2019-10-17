@@ -6,8 +6,16 @@ namespace Capstone.Models
 {
     public class Inventory
     {
+        /// <summary>
+        /// The contents of the inventory.
+        /// </summary>
         public Dictionary<string, Item> Contents { get; private set; } = new Dictionary<string, Item>();
 
+        /// <summary>
+        /// Checks whether a given slot has items in stock.
+        /// </summary>
+        /// <param name="slot"></param>
+        /// <returns></returns>
         public bool SlotHasItems(string slot)
         {
             return Contents[slot].Count != 0;

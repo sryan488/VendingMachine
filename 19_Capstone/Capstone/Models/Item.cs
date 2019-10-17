@@ -29,7 +29,7 @@ namespace Capstone.Models
 
         /// <summary>
         /// Properties
-        /// Define fields Name, SnackType, Price, Slot, EatResponse
+        /// Define fields: Name, SnackType, Price, Slot, EatResponse
         /// </summary>
         public string Name { get; }
         public string SnackType { get; }
@@ -41,6 +41,7 @@ namespace Capstone.Models
             {
                 switch(SnackType)
                 {
+                    // When a snack is dispensed, it prints a response to the console
                     case "chip":
                         return "Crunch Crunch, Yum!";
                     case "candy":
